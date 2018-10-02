@@ -1,0 +1,9 @@
+.books__image {
+  height: 100px;
+  width: 100px;
+  border: 1px solid #000000;
+}
+
+.books__delete {
+  float: right;
+}

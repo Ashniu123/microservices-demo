@@ -1,0 +1,19 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.search {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 2rem;
+}
+
+.books {
+  border-right: 1px solid #ccc;
+  padding-top: 1.8rem;
+}
+
+.todo {
+  padding-top: 1.8rem;
+}

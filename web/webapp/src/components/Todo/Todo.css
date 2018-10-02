@@ -1,0 +1,8 @@
+.todo__completed {
+  float: right;
+}
+
+.todo__name {
+  float: left;
+  font-size: 1.5rem;
+}
