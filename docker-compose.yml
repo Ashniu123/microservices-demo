@@ -4,8 +4,6 @@ services:
     build: './web'
     ports:
       - '3000:3000'
-    depends_on:
-      - db
     environment:
       - PORT=3000
 
@@ -13,8 +11,6 @@ services:
     build: './search'
     ports:
       - '3001:3000'
-    depends_on:
-      - db
 
   books:
     build: './books'
