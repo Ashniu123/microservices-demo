@@ -1,23 +1,16 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const BookSchema = new Schema({
-  name: {
+const EventSchema = new Schema({
+  type: {
     type: String,
     required: true
   },
-  author: {
-    type: String,
-    required: true
-  },
-  imgUrl: {
-    type: String,
-    required: true
-  },
+  metadata: Schema.Types.Mixed,
   timestamp: {
     type: Number,
     required: true
   }
 });
 
-module.exports = mongoose.model('Book', BookSchema);
+module.exports = mongoose.model('BookEvent', EventSchema);

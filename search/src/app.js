@@ -21,12 +21,16 @@ app.get('/api/v1/search', async (req, res) => {
   try {
     console.log(req.query);
 
-    const booksUrl = new URL('http://books:3000/api/v1/books');
+    const booksHost =
+      process.env.NODE_ENV === 'production' ? 'todo:3000' : 'localhost:3001';
+    const booksUrl = new URL(`http://${booksHost}/api/v1/books`);
     Object.keys(req.query).forEach(key =>
       booksUrl.searchParams.append(key, req.query[key])
     );
 
-    const todoUrl = new URL('http://todo:3000/api/v1/todo');
+    const todoHost =
+      process.env.NODE_ENV === 'production' ? 'todo:3000' : 'localhost:3002';
+    const todoUrl = new URL(`http://${todoHost}/api/v1/todo`);
     Object.keys(req.query).forEach(key =>
       todoUrl.searchParams.append(key, req.query[key])
     );
