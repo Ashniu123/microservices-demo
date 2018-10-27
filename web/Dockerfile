@@ -1,20 +1,20 @@
-FROM golang:1.9.2-alpine
+FROM golang:1.9.2-alpine as builder
 
-RUN mkdir -p /src/webapp/build
-# RUN apk update
-# RUN apk add git
+WORKDIR /usr/app
 
-COPY /src /src
+COPY ./src .
 
-COPY /webapp/build /src/webapp/build
+RUN go build -o main .
+
+FROM alpine:latest
+
+WORKDIR /usr/app
+
+COPY --from=builder /usr/app/main ./main
+COPY ./webapp/build ./webapp/build
 
 ENV PORT 3000
 
-WORKDIR /src
-
-# RUN go get -d ./...
-RUN go build -o main .
-
 EXPOSE 3000
 
-CMD ["/src/main"]
+CMD ["./main"]

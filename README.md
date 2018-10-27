@@ -18,5 +18,6 @@ docker-compose up [-d]
 
 ### Future Plans
 
-1. Add event bus like Kafka (will be on a different branch)
-2. Add a caching service like redis (will be on a different branch)
+1. Add event sourcing (will be on a different branch) - DONE!
+2. Add event bus like Kafka for interservice communication (will be on a different branch)
+3. Add a caching service like redis (will be on a different branch)
