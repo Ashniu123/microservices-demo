@@ -12,7 +12,7 @@
     "demo",
     "docker"
   ],
-  "author": "Nisheet Sinvhal <nisheet1.sinvhal@gmail.com>",
+  "author": "Nisheet Sinvhal <nisheet1.sinvhal@gmail.com>, Akshat Shetty <akshatshetty2908@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "body-parser": "1.18.3",
@@ -20,6 +20,7 @@
     "dotenv": "6.0.0",
     "express": "4.16.3",
     "helmet": "3.13.0",
+    "thrift": "0.11.0",
     "mongodb": "3.1.6",
     "mongoose": "5.3.0",
     "morgan": "1.9.1"
