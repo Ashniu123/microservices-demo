@@ -10,7 +10,7 @@ typedef i32 Version
 struct Book {
   1: optional BookId id,
   2: optional string name,
-  3: optional UserId description,
+  3: optional string description,
   4: optional string author,
   5: optional int cost,
   31: optional Timestamp createdAt,
@@ -50,9 +50,6 @@ enum SuccessCode {
   BOOK_CREATED = 2,
   BOOK_UPDATED = 3,
   BOOK_DELETED = 4,
-  COMMENT_CREATED = 5,
-  COMMENT_UPDATED = 6,
-  COMMENT_DELETED = 7,
 }
 
 enum ErrorCode {
@@ -65,14 +62,11 @@ enum ErrorCode {
 # === Requests ===
 struct CreateBookRequest {
   1: optional string name,
-  3: optional UserId description,
-  4: optional string author,
+  3: optional string author,
+  4: optional string description,
   5: optional int cost
 }
 
-struct GetBookRequest {
-  1: required BookFilter filter,
-}
 
 struct ListBookRequest {
   1: optional BookFilter filter,
@@ -134,7 +128,7 @@ exception BookException {
 service BookService {
   string ping(), # Just to check if server is up or not. Should return "ping"
   CreateBookResponse createBook(1: required CreateBookRequest request) throws (1: StoreException ex1, 2: BookException ex2),
-  GetBookResponse getBook(1: required GetBookRequest request) throws (1: StoreException ex1, 2: BookException ex2),
+  GetBookResponse getBook(1: required BookFilter request) throws (1: StoreException ex1, 2: BookException ex2),
   ListBookResponse listBook(1: required ListBookRequest request) throws (1: StoreException ex1, 2: BookException ex2),
   ResponseStatus updateBook(1: required UpdateBookRequest request) throws (1: StoreException ex1, 2: BookException ex2),
   ResponseStatus deleteBook(1: required BookId BookId) throws (1: StoreException ex1, 2: BookException ex2),

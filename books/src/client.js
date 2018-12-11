@@ -33,10 +33,6 @@ const CreateBookRequest = new ttypes.CreateBookRequest({
 
     A modern masterpiece, The Godfather is the epic story of organised crime in the 1940s. It is also the intimate story of the Corleone family, at once drawn together and ripped apart by its unique position at the core of the American Mafia. Still shocking more than a quarter-century after it was first published, this compelling tale of blackmail, murder and family values is a true classic.`
 });
-const UpdateBookRequest = new ttypes.UpdateBookRequest({
-  bookId: "5c0cdfd1459da9430f7e4657",
-  cost: 234
-});
 
 // client.createBook(CreateBookRequest, (err, response) => {
 //   if (err) {
@@ -53,10 +49,54 @@ const UpdateBookRequest = new ttypes.UpdateBookRequest({
 //   }
 // });
 
-client.updateBook(UpdateBookRequest, (err, response) => {
+const UpdateBookRequest = new ttypes.UpdateBookRequest({
+  bookId: "5c0cdfd1459da9430f7e4657",
+  cost: 234
+});
+
+// client.updateBook(UpdateBookRequest, (err, response) => {
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     console.log(response);
+//   }
+// });
+
+const BookFilter = new ttypes.BookFilter({
+    // bookd: 1,
+    lteCost: 400,
+    gteCost: 300,
+  description: "IN"
+  //   lteUpdatedAt: Date.now().toString()
+});
+
+client.getBook(BookFilter, (err, response) => {
   if (err) {
     console.log(err);
   } else {
     console.log(response);
   }
 });
+
+const listBookRequest = new ttypes.ListBookRequest({
+  filter: BookFilter,
+  skip: 0,
+  limit: 5,
+  sortBy: ttypes.SortBy.CREATED_AT,
+  sort: ttypes.SortOrder.ASC
+});
+client.listBook(listBookRequest, (err, response) => {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log(response);
+  }
+});
+
+client.deleteBook('5c0f8d7ee472843260b88b88',(err,response)=>{
+  if (err) {
+    console.log(err);
+  } else {
+    console.log(response);
+  }
+})

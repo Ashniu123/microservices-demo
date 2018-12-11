@@ -27,10 +27,7 @@ ttypes.SuccessCode = {
   'SUCCESS' : 1,
   'BOOK_CREATED' : 2,
   'BOOK_UPDATED' : 3,
-  'BOOK_DELETED' : 4,
-  'COMMENT_CREATED' : 5,
-  'COMMENT_UPDATED' : 6,
-  'COMMENT_DELETED' : 7
+  'BOOK_DELETED' : 4
 };
 ttypes.ErrorCode = {
   'SOMETHING_WRONG' : 1,
@@ -396,18 +393,18 @@ BookFilter.prototype.write = function(output) {
 
 var CreateBookRequest = module.exports.CreateBookRequest = function(args) {
   this.name = null;
-  this.description = null;
   this.author = null;
+  this.description = null;
   this.cost = null;
   if (args) {
     if (args.name !== undefined && args.name !== null) {
       this.name = args.name;
     }
-    if (args.description !== undefined && args.description !== null) {
-      this.description = args.description;
-    }
     if (args.author !== undefined && args.author !== null) {
       this.author = args.author;
+    }
+    if (args.description !== undefined && args.description !== null) {
+      this.description = args.description;
     }
     if (args.cost !== undefined && args.cost !== null) {
       this.cost = args.cost;
@@ -437,14 +434,14 @@ CreateBookRequest.prototype.read = function(input) {
       break;
       case 3:
       if (ftype == Thrift.Type.STRING) {
-        this.description = input.readString();
+        this.author = input.readString();
       } else {
         input.skip(ftype);
       }
       break;
       case 4:
       if (ftype == Thrift.Type.STRING) {
-        this.author = input.readString();
+        this.description = input.readString();
       } else {
         input.skip(ftype);
       }
@@ -472,75 +469,19 @@ CreateBookRequest.prototype.write = function(output) {
     output.writeString(this.name);
     output.writeFieldEnd();
   }
-  if (this.description !== null && this.description !== undefined) {
-    output.writeFieldBegin('description', Thrift.Type.STRING, 3);
-    output.writeString(this.description);
+  if (this.author !== null && this.author !== undefined) {
+    output.writeFieldBegin('author', Thrift.Type.STRING, 3);
+    output.writeString(this.author);
     output.writeFieldEnd();
   }
-  if (this.author !== null && this.author !== undefined) {
-    output.writeFieldBegin('author', Thrift.Type.STRING, 4);
-    output.writeString(this.author);
+  if (this.description !== null && this.description !== undefined) {
+    output.writeFieldBegin('description', Thrift.Type.STRING, 4);
+    output.writeString(this.description);
     output.writeFieldEnd();
   }
   if (this.cost !== null && this.cost !== undefined) {
     output.writeFieldBegin('cost', Thrift.Type.I32, 5);
     output.writeI32(this.cost);
-    output.writeFieldEnd();
-  }
-  output.writeFieldStop();
-  output.writeStructEnd();
-  return;
-};
-
-var GetBookRequest = module.exports.GetBookRequest = function(args) {
-  this.filter = null;
-  if (args) {
-    if (args.filter !== undefined && args.filter !== null) {
-      this.filter = new ttypes.BookFilter(args.filter);
-    } else {
-      throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field filter is unset!');
-    }
-  }
-};
-GetBookRequest.prototype = {};
-GetBookRequest.prototype.read = function(input) {
-  input.readStructBegin();
-  while (true)
-  {
-    var ret = input.readFieldBegin();
-    var fname = ret.fname;
-    var ftype = ret.ftype;
-    var fid = ret.fid;
-    if (ftype == Thrift.Type.STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 1:
-      if (ftype == Thrift.Type.STRUCT) {
-        this.filter = new ttypes.BookFilter();
-        this.filter.read(input);
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      case 0:
-        input.skip(ftype);
-        break;
-      default:
-        input.skip(ftype);
-    }
-    input.readFieldEnd();
-  }
-  input.readStructEnd();
-  return;
-};
-
-GetBookRequest.prototype.write = function(output) {
-  output.writeStructBegin('GetBookRequest');
-  if (this.filter !== null && this.filter !== undefined) {
-    output.writeFieldBegin('filter', Thrift.Type.STRUCT, 1);
-    this.filter.write(output);
     output.writeFieldEnd();
   }
   output.writeFieldStop();

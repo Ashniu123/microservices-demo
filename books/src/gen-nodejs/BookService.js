@@ -247,7 +247,7 @@ var BookService_getBook_args = function(args) {
   this.request = null;
   if (args) {
     if (args.request !== undefined && args.request !== null) {
-      this.request = new ttypes.GetBookRequest(args.request);
+      this.request = new ttypes.BookFilter(args.request);
     } else {
       throw new Thrift.TProtocolException(Thrift.TProtocolExceptionType.UNKNOWN, 'Required field request is unset!');
     }
@@ -269,7 +269,7 @@ BookService_getBook_args.prototype.read = function(input) {
     {
       case 1:
       if (ftype == Thrift.Type.STRUCT) {
-        this.request = new ttypes.GetBookRequest();
+        this.request = new ttypes.BookFilter();
         this.request.read(input);
       } else {
         input.skip(ftype);
