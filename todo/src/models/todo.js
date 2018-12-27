@@ -1,16 +1,28 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const EventSchema = new Schema({
-  type: {
+const TodoSchema = new Schema({
+  name: {
     type: String,
     required: true
   },
-  metadata: Schema.Types.Mixed,
+  userId: {
+    type: mongoose.Types.ObjectId,
+    required: true
+  },
+  type: {
+    type: String,
+    enum: ["planning", "analysis", "design", "implementation", "testing"],
+    required: true
+  },
+  completed: {
+    type: Boolean,
+    required: true
+  },
   timestamp: {
     type: Number,
     required: true
   }
 });
 
-module.exports = mongoose.model('TodoEvent', EventSchema);
+module.exports = mongoose.model("TodoEvent", EventSchema);
